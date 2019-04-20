@@ -90,6 +90,9 @@ function modifierproduit($produit,$refe)
             die('Erreur: '.$e->getMessage());
         }
 	}
+	
+
+	
 	function afficherproduit()
 	{
   		$db = config::getConnexion();
@@ -166,6 +169,46 @@ function modifierproduit($produit,$refe)
             die('Erreur: '.$e->getMessage());
         }	
 	}
+	 function homme()
+    {
+        $db = config::getConnexion();
+        $req1 = $db->query("SELECT * FROM produit Where dest='Homme'");
+        return $req1->rowCount();
+    }
+	 function femme()
+    {
+        $db = config::getConnexion();
+        $req1 = $db->query("SELECT * FROM produit Where dest='Femme'");
+        return $req1->rowCount();
+    }
+	function Enfant()
+    {
+        $db = config::getConnexion();
+        $req1 = $db->query("SELECT * FROM produit Where dest='Enfant'");
+        return $req1->rowCount();
+    }
+	
+	
+	function chercherproduit($foo)
+    {   
+	    $db = config::getConnexion(); 
+        $sql="SELECT * from produit where mar LIKE '%$foo%' or descr LIKE '%$foo%' ";
+         //connexion bd
+        
+        //reqt sql
+        //fetch data
+        try
+        {
+        	$req=$db->prepare($sql);
+ 	    $req->execute();
+ 		$rdv= $req->fetchALL(PDO::FETCH_OBJ);
+		return $rdv;
+        }
+        catch (Exception $e)
+        {
+        	die('Erreur:'.$e->getMessage());
+        }
+    } 
 }
 
 

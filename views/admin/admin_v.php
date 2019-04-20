@@ -1,8 +1,8 @@
 <?php 
  
-require 'C:/wamp64/www/Projet2eme/core/produitC.php';
-$produitC=new produitC();
-$listeproduit=$produitC->afficherproduit();
+require 'C:/wamp64/www/Projet2eme/core/adminC.php';
+$categorieC=new adminC();
+$listecategorie=$categorieC->afficheradmin();
 
  
 ?>
@@ -136,10 +136,10 @@ $listeproduit=$produitC->afficherproduit();
             </div>
           </div>
           <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
-           <ul class="list-unstyled">
+          <ul class="list-unstyled">
             <li><a href="index.html"> <i class="icon-home"></i>Home </a></li>
-			<li  ><a href="admin_v.php"> <em class="icon-home"></em>  Admin </a></li>
-             <li class="active"><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Stock </a>
+			<li class="active" ><a href="admin_v.php"> <em class="icon-home"></em>  Admin </a></li>
+             <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Stock </a>
               <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
                 <li><a href="produit_v.php">Produit</a></li>
                 <li><a href="categorie_v.php">Categorie</a></li>
@@ -158,6 +158,7 @@ $listeproduit=$produitC->afficherproduit();
             <li><a href="login.html"> <i class="icon-interface-windows"></i>Livraisons </a></li>
             <li><a href="login.html"> <i class="icon-interface-windows"></i>service aprés vente </a></li>
           </ul><span class="heading">Extras</span>
+          <ul class="list-unstyled">
             <li> <a href="#"> <i class="icon-flask"></i>Demo </a></li>
             <li> <a href="#"> <i class="icon-screen"></i>Demo </a></li>
             <li> <a href="#"> <i class="icon-mail"></i>Demo </a></li>
@@ -168,14 +169,13 @@ $listeproduit=$produitC->afficherproduit();
           <!-- Page Header-->
           <header class="page-header">
             <div class="container-fluid">
-              <h2 class="no-margin-bottom">Produits</h2>
+              <h2 class="no-margin-bottom">Admin</h2>
             </div>
           </header>
           <!-- Breadcrumb-->
     
        
-	<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark"><a class="navbar-brand" href="produit_ajout.php">Click Here To Add</a>
-
+	<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark"><a class="navbar-brand" href="admin_ajout.html">    Ajouter</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -183,99 +183,43 @@ $listeproduit=$produitC->afficherproduit();
     <ul class="navbar-nav">
       
     </ul>
-	<li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse">Trie </a>
-              <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
-                <li><a href="produit_trie_prix.php">Prix</a></li>
-                <li><a href="produit_trie_ref.php">Reference</a></li>
-                <li><a href="produit_trie_qte.php">Quantite</a></li>
-				 <li><a href="produit_trie_mar.php">Marque</a></li>
-              </ul>
-	</li>	
   </div>
-  	  
 </nav>
-
   <div class="card-body">
  
    <table class="table table-bordered table-dark">
   <thead>
     <tr>
-      <th scope="col">Reference</th>
-      <th scope="col">Marque</th>
-      <th scope="col">Destinataire</th>
-      <th scope="col">Prix</th>
-	  <th scope="col">Quantite</th>
-	  <th scope="col">Url</th>
-	  <th scope="col">Categorie</th>
-	  <th scope="col">Description</th>
+      <th scope="col">Id Admin</th>
+      <th scope="col">Mot De Passe</th>
+       <th scope="col">Cin Admin</th>
+	    <th scope="col">Tel Admin</th>
 	 
 	  <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
-<?php foreach($listeproduit as $produit): ?>
+<?php foreach($listecategorie as $admin): ?>
     <tr>
-      <td> <?= $produit->refe; ?> </td>
-	  <td> <?= $produit->mar ?> </td>
-      <td> <?= $produit->dest; ?> </td>
-      <td> <?= $produit->prix; ?> </td>
-      <td> <?= $produit->qte; ?> </td>
-	  <td> <?= $produit->url; ?> </td>
-	  <td> <?= $produit->nomCat; ?> </td>
-	  <td> <?= $produit->descr; ?> </td>
+      <td> <?= $admin->id ; ?> </td>
+	  <td> <?= $admin->mdp ; ?> </td>
+	  <td> <?= $admin->cin ; ?> </td>
+	  <td> <?= $admin->tel ; ?> </td>
+     
 	  
-     <td>
-              <a href="modifier_produit.php?refe=<?= $produit->refe ?> "   class="btn btn-info"> Edit </a>
-              <a onclick="return confirm('Are you sure you want to delete this entry ?')" href="supprimerProduit.php?refe=<?= $produit->refe ?>" class="btn btn-danger"> Delete </a>
-            </td>
+    <td>
+              <a href="modifier_admin.php?cin=<?= $admin->cin ?> "   class="btn btn-info"> Edit </a>
+              <a onclick="return confirm('Are you sure you want to delete this entry ?')" href="supprimeradmin.php?refp=<?= $admin->cin ?>" class="btn btn-danger"> Delete </a>
+            </td> 
     </tr>
   </tbody>
             <?php endforeach; ?>
 </table>
-<?php
-$dataPoints = array(
-    array("label"=> "Homme", "y"=> (int)$produitC->homme()),
-   array("label"=> "Femme", "y"=> (int)$produitC->femme()) ,
-   array("label"=> "Enfant", "y"=> (int)$produitC->Enfant())
-);
-
-?>
-                                       <script>
-                    window.onload = function () {
-
-                        var chart = new CanvasJS.Chart("chartContainer", {
-                            animationEnabled: true,
-                            exportEnabled: true,
-                            title:{
-                                text: "Produit"
-                            },
-                            subtitles: [{
-                                text: "Destinataire"
-                            }],
-                            data: [{
-                                type: "pie",
-                                showInLegend: "true",
-                                legendText: "{label}",
-                                indexLabelFontSize: 16,
-                                indexLabel: "{label} - #percent%",
-                                yValueFormatString: "฿#,##0",
-                                dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
-                            }]
-                        });
-                        chart.render();
-
-                    }
-                </script>
-                <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-                <script src="canvasjs.min.js"></script>
-
   </div>
-  
-  
+</div>
 
 
-    
-
+         </div>
           <!-- Page Footer-->
           <footer class="main-footer">
             <div class="container-fluid">

@@ -8,6 +8,8 @@ $listeproduit=$produitC->trierproduitmar();
 ?>
 
 
+
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -136,17 +138,17 @@ $listeproduit=$produitC->trierproduitmar();
             </div>
           </div>
           <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
-          <ul class="list-unstyled">
+           <ul class="list-unstyled">
             <li><a href="index.html"> <i class="icon-home"></i>Home </a></li>
-           
-			 <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-grid"></i>Stock </a>
+			<li  ><a href="admin_v.php"> <em class="icon-home"></em>  Admin </a></li>
+             <li class="active"><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Stock </a>
               <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
                 <li><a href="produit_v.php">Produit</a></li>
-                <li><a href="categorie_v.php">Categorie</a></li>
+                <li><a href="categorie_v.php">Admin</a></li>
                 
               </ul>
             </li>
-            <li><a href="categorie_v.php"> <i class="fa fa-bar-chart"></i>Commandes </a></li>
+            <li><a href="charts.html"> <i class="fa fa-bar-chart"></i>Commandes </a></li>
             <li><a href="forms.html"> <i class="icon-padnote"></i>Clients </a></li>
             <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Marketing </a>
               <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
@@ -158,7 +160,6 @@ $listeproduit=$produitC->trierproduitmar();
             <li><a href="login.html"> <i class="icon-interface-windows"></i>Livraisons </a></li>
             <li><a href="login.html"> <i class="icon-interface-windows"></i>service aprés vente </a></li>
           </ul><span class="heading">Extras</span>
-          <ul class="list-unstyled">
             <li> <a href="#"> <i class="icon-flask"></i>Demo </a></li>
             <li> <a href="#"> <i class="icon-screen"></i>Demo </a></li>
             <li> <a href="#"> <i class="icon-mail"></i>Demo </a></li>
@@ -175,7 +176,7 @@ $listeproduit=$produitC->trierproduitmar();
           <!-- Breadcrumb-->
     
        
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark"><a class="navbar-brand" href="produit_ajout.html">Click Here To Add</a>
+	<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark"><a class="navbar-brand" href="produit_ajout.php">Click Here To Add</a>
 
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -195,19 +196,6 @@ $listeproduit=$produitC->trierproduitmar();
   </div>
   	  
 </nav>
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark"><a class="navbar-brand" href="produit_ajout.html">Trie selon(prix)</a>
-
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      
-    </ul>
-  </div>
-</nav>
-
-
 
   <div class="card-body">
  
@@ -220,6 +208,7 @@ $listeproduit=$produitC->trierproduitmar();
       <th scope="col">Prix</th>
 	  <th scope="col">Quantite</th>
 	  <th scope="col">Url</th>
+	  <th scope="col">Categorie</th>
 	  <th scope="col">Description</th>
 	 
 	  <th scope="col">Action</th>
@@ -234,6 +223,7 @@ $listeproduit=$produitC->trierproduitmar();
       <td> <?= $produit->prix; ?> </td>
       <td> <?= $produit->qte; ?> </td>
 	  <td> <?= $produit->url; ?> </td>
+	  <td> <?= $produit->nomCat; ?> </td>
 	  <td> <?= $produit->descr; ?> </td>
 	  
      <td>
@@ -244,11 +234,50 @@ $listeproduit=$produitC->trierproduitmar();
   </tbody>
             <?php endforeach; ?>
 </table>
+<?php
+$dataPoints = array(
+    array("label"=> "Homme", "y"=> (int)$produitC->homme()),
+   array("label"=> "Femme", "y"=> (int)$produitC->femme()) ,
+   array("label"=> "Enfant", "y"=> (int)$produitC->Enfant())
+);
+
+?>
+                                       <script>
+                    window.onload = function () {
+
+                        var chart = new CanvasJS.Chart("chartContainer", {
+                            animationEnabled: true,
+                            exportEnabled: true,
+                            title:{
+                                text: "Produit"
+                            },
+                            subtitles: [{
+                                text: "Destinataire"
+                            }],
+                            data: [{
+                                type: "pie",
+                                showInLegend: "true",
+                                legendText: "{label}",
+                                indexLabelFontSize: 16,
+                                indexLabel: "{label} - #percent%",
+                                yValueFormatString: "฿#,##0",
+                                dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+                            }]
+                        });
+                        chart.render();
+
+                    }
+                </script>
+                <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                <script src="canvasjs.min.js"></script>
+
   </div>
-</div>
+  
+  
 
 
-         </div>
+    
+
           <!-- Page Footer-->
           <footer class="main-footer">
             <div class="container-fluid">

@@ -1,10 +1,15 @@
-<?php 
- 
-require 'C:/wamp64/www/Projet2eme/core/produitC.php';
-$produitC=new produitC();
-$listeproduit=$produitC->afficherproduit();
 
+<?php
+require '../../core/produitC.php';
+$off=new produitC();
+$liste= $off->afficherproduit();
+ if(isset($_POST['sea']))
+    { $val=$_POST['sea'];
+  $produit=new produitC();
+  $liste1=$produit->chercherproduit($val);
+	}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="zxx">
@@ -116,9 +121,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<button type="button" class="overlay-close">
 						<i class="fa fa-times" aria-hidden="true"></i>
 					</button>
-					<form  method="POST" class="d-flex" >
+					<form action="#" method="post" class="d-flex">
 						<input class="form-control" type="search" placeholder="Search here..." required="" name="inputchercher">
-						<button type="submit" class="btn btn-primary submit" >
+						<button type="submit" class="btn btn-primary submit" name="chercher">
 							<i class="fas fa-search"></i>
 						</button>
 					</form>
@@ -325,6 +330,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="side-bar col-lg-3">
 							<div class="search-hotel">
 								<h3 class="agileits-sear-head">Search Here..</h3>
+								
+								
+								
 								<form  method="post" action="chercher.php">
 										<input class="form-control" type="search" name="sea" placeholder="Search here..." required="">
 										
@@ -334,6 +342,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										</button>
 										<div class="clearfix"> </div>
 									</form>
+								
+								
+								
+								
 							</div>
 							<!-- price range -->
 							<div class="range">
@@ -514,7 +526,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								</div>
 							  <div class="row">
 									<!-- /womens -->
-					<?php foreach($listeproduit as $produit): ?>				
+					<?php foreach($liste1 as $produit): ?>				
 								  <div class="col-md-3 product-men women_two shop-gd">
 										<div class="product-googles-info googles">
 											<div class="men-pro-item">
@@ -1300,8 +1312,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 		<script src="js/bootstrap.js"></script>
 		<!-- js file -->
-		
-		
 </body>
 
 </html>
