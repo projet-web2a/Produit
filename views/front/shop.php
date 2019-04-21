@@ -3,7 +3,7 @@
 require 'C:/wamp64/www/Projet2eme/core/produitC.php';
 $produitC=new produitC();
 $listeproduit=$produitC->afficherproduit();
-
+$num=$produitC->shop();
 ?>
 
 <!DOCTYPE html>
@@ -57,11 +57,27 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 				<div class="col-md-3 top-info-cart text-right mt-lg-4">
 					<ul class="cart-inner-info">
-						<li class="button-log">
-							<a class="btn-open" href="#">
-								<span class="fa fa-user" aria-hidden="true"></span>
-							</a>
-						</li>
+					
+					
+					
+					
+					
+					<li class="nav-item dropdown"> <a id="notifications" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-bell"></i><span class="badge bg-red badge-corner"><?php  if($num!=0)  {echo "1";} else {echo"0";}?></span></a>
+                  <ul aria-labelledby="notifications" class="dropdown-menu">
+                    <li><a rel="nofollow" href="#" class="dropdown-item"> 
+                        <div class="notification">
+                          <div class="notification-content"><i class="fa fa-envelope bg-green"></i> <?php   echo $num; ?> New Product  </div>
+                          <div class="notification-time"><small>4 minutes ago</small></div>
+                        </div></a></li>
+                    
+                
+                 
+                    <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>view all notifications                                            </strong></a></li>
+                  </ul>
+                </li>
+				
+				
+				
 						<li class="galssescart galssescart2 cart cart box_1">
 							<form action="#" method="post" class="last">
 								<input type="hidden" name="cmd" value="_cart">
@@ -74,35 +90,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</li>
 					</ul>
 					<!---->
-					<div class="overlay-login text-left">
-						<button type="button" class="overlay-close1">
-							<i class="fa fa-times" aria-hidden="true"></i>
-						</button>
-						<div class="wrap">
-							<h5 class="text-center mb-4">Login Now</h5>
-							<div class="login p-5 bg-dark mx-auto mw-100">
-								<form action="#" method="post">
-									<div class="form-group">
-										<label class="mb-2">Email address</label>
-										<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" required="">
-										<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-									</div>
-									<div class="form-group">
-										<label class="mb-2">Password</label>
-										<input type="password" class="form-control" id="exampleInputPassword1" placeholder="" required="">
-									</div>
-									<div class="form-check mb-2">
-										<input type="checkbox" class="form-check-input" id="exampleCheck1">
-										<label class="form-check-label" for="exampleCheck1">Check me out</label>
-									</div>
-									<button type="submit" class="btn btn-primary submit mb-4">Sign In</button>
-
-								</form>
-							</div>
-							<!---->
-						</div>
-					</div>
-					<!---->
+				
 				</div>
 			</div>
 			<div class="search">

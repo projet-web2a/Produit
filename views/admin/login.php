@@ -46,7 +46,7 @@
             <div class="col-lg-6 bg-white">
               <div class="form d-flex align-items-center">
                 <div class="content">
-                  <form  class="form-validate" method="POST" action="../../core/verll.php">
+                  <form  class="form-validate" method="POST" action="../../core/veriflogin.php">
                     <div class="form-group">
                       <input id="login-username" type="text" name="login" required data-msg="Please enter your username" class="input-material">
                       <label for="login-username" class="label-material">User Name</label>

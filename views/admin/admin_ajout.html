@@ -26,7 +26,37 @@
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
 		 <!-- Required meta tags -->
-<script language="javascript" src="js/javafront.js" ></script>
+<script language="javascript" >
+function verifad()
+{
+if (f.id.value=="" || f.mdp.value=="" )
+{
+alert ("check ID or Password");
+return false;
+}
+else if (isNaN(f.cin.value)) 
+{
+alert ("Cin must be numbers only ");
+return false;
+}
+else if (f.cin.value.length()<8)
+{
+alert ("Cin must be 8 numbers ");
+return false;
+}
+else if (isNaN(f.tel.value)) 
+{
+alert ("Phone must be numbers only ");
+return false;
+}
+
+}
+
+
+
+
+
+</script>
   </head>
   <body>
   
@@ -198,7 +228,7 @@
     <label for="formGroupExampleInput4">Cin</label>
     <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="nom categorie" name="cin">
   </div>
-<button type="submit" class="btn btn-primary"  >Ajouter</button>
+<button type="submit" class="btn btn-primary" onclick="return verifad()" >Ajouter</button>
 </form>
   </div>
 </div>

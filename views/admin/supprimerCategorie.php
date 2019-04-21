@@ -1,7 +1,7 @@
 <?PHP
-require 'C:/wamp64/www/Projet2eme/core/catergorieC.php';
+require '../../core/catergorieC.php';
 
-$ref=$_GET["refp"];
+$ref=$_GET["cin"];
 $categoC= new categorieC();
 	$categoC->Supprimercategorie($ref);
 	header('Location: categorie_v.php');

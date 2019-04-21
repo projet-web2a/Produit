@@ -1,20 +1,19 @@
-<?php  session_start(); ?>
 <?php 
  
+require 'C:/wamp64/www/Projet2eme/entites/admin.php';
 require 'C:/wamp64/www/Projet2eme/core/adminC.php';
+$cin=$_GET['cin'];
 $categorieC=new adminC();
-$listecategorie=$categorieC->afficheradmin();
 
- if (empty($_SESSION['id']))
- {
-	 echo "<script type='text/javascript'>";
-echo "alert('Please Login First');
-window.location.href='login.php';";
-echo "</script>";
-	 
- }
-
+$result=$categorieC->recupereradmin($cin);
+foreach($result as $admin) {
+            $id= $admin->id; 
+  		    $mdp=$admin->mdp;
+			$cin=$admin->cin;
+			$tel=$admin->tel;
+          } 
 ?>
+
 
 
 <!DOCTYPE html>
@@ -40,11 +39,38 @@ echo "</script>";
     <link rel="stylesheet" href="css/custom.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="img/favicon.ico">
-  
-  
-  
-  
-  
+    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+		 <!-- Required meta tags -->
+<script language="javascript" >
+function verifad()
+{
+if (f.id.value=="" || f.mdp.value=="" )
+{
+alert ("check ID or Password");
+return false;
+}
+else if (isNaN(f.cin.value)) 
+{
+alert ("Cin must be numbers only ");
+return false;
+}
+else if (f.cin.value.length()<8)
+{
+alert ("Cin must be 8 numbers ");
+return false;
+}
+else if (isNaN(f.tel.value)) 
+{
+alert ("Phone must be numbers only ");
+return false;
+}
+
+}
+
+
+</script>
   </head>
   <body>
   
@@ -63,7 +89,7 @@ echo "</script>";
             <div class="navbar-holder d-flex align-items-center justify-content-between">
               <!-- Navbar Header-->
               <div class="navbar-header">
-                <!-- Navbar Brand --><a href="index.html" class="navbar-brand d-none d-sm-inline-block">
+                <!-- Navbar Brand --><a href="index.php" class="navbar-brand d-none d-sm-inline-block">
                   <div class="brand-text d-none d-lg-inline-block"> EyeZone</div>
                   <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>BD</strong></div></a>
                 <!-- Toggle Button--><a id="toggle-btn" href="#" class="menu-btn active"><span></span><span></span><span></span></a>
@@ -127,7 +153,7 @@ echo "</script>";
                   </ul>
                 </li>
                 <!-- Logout    -->
-                <li class="nav-item"><a href="../../core/logout.php" class="nav-link logout"> <span class="d-none d-sm-inline">Logout</span><i class="fa fa-sign-out"></i></a></li>
+                <li class="nav-item"><a href="login.html" class="nav-link logout"> <span class="d-none d-sm-inline">Logout</span><i class="fa fa-sign-out"></i></a></li>
               </ul>
             </div>
           </div>
@@ -147,8 +173,7 @@ echo "</script>";
           <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
           <ul class="list-unstyled">
             <li><a href="index.html"> <i class="icon-home"></i>Home </a></li>
-			<li class="active" ><a href="admin_v.php"> <em class="icon-home"></em>  Admin </a></li>
-             <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Stock </a>
+           <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Stock </a>
               <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
                 <li><a href="produit_v.php">Produit</a></li>
                 <li><a href="categorie_v.php">Categorie</a></li>
@@ -178,13 +203,15 @@ echo "</script>";
           <!-- Page Header-->
           <header class="page-header">
             <div class="container-fluid">
-              <h2 class="no-margin-bottom">Admin</h2>
+              <h2 class="no-margin-bottom">&nbsp;</h2>
             </div>
           </header>
           <!-- Breadcrumb-->
     
        
-	<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark"><a class="navbar-brand" href="admin_ajout.html">    Ajouter</a>
+    <div class="card" style="width: 70rem;">
+    <div class="card-header">
+  <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark"><a class="navbar-brand" href="produit.html">    Ajouter</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -193,44 +220,35 @@ echo "</script>";
       
     </ul>
   </div>
-</nav>
-  <div class="card-body">
- 
-   <table class="table table-bordered table-dark">
-  <thead>
-    <tr>
-      <th scope="col">Id Admin</th>
-      <th scope="col">Mot De Passe</th>
-       <th scope="col">Cin Admin</th>
-	    <th scope="col">Tel Admin</th>
-	 
-	  <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-<?php foreach($listecategorie as $admin): ?>
-    <tr>
-      <td> <?= $admin->id ; ?> </td>
-	  <td> <?= $admin->mdp ; ?> </td>
-	  <td> <?= $admin->cin ; ?> </td>
-	  <td> <?= $admin->tel ; ?> </td>
+</nav>         
      
-	<?php  if ($_SESSION['id']=='wafa'){?> 
-    <td>
-	       
-           <a href="modifier_admin.php?cin=<?= $admin->cin ?> "   class="btn btn-info"> Edit </a>
-              <a onclick="return confirm('Are you sure you want to delete this entry ?')" href="supprimeradmin.php?cin=<?= $admin->cin ?>" class="btn btn-danger"> Delete </a>
-            </td> 
-		  <?php } ?> 
-    </tr>
-  </tbody>
-            <?php endforeach; ?>
-</table>
+</div>
+  <div class="card-body">
+ <form name="f" method="POST" >
+  <div class="form-group">
+    <label for="formGroupExampleInput3">Nom Utilisateur</label>
+    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="reference categorie produit" name="id" value="<?PHP echo $id ?>" readonly>
+  </div>
+  <div class="form-group">
+    <label for="formGroupExampleInput4">Mot De pass</label>
+    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="nom categorie" name="mdp" value="<?PHP echo $mdp ?>">
+  </div>
+
+  <div class="form-group">
+    <label for="formGroupExampleInput4">Numero Telephone</label>
+    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="nom categorie" name="tel" value="<?PHP echo $tel ?>">
+  </div>
+  <div class="form-group">
+    <label for="formGroupExampleInput4">Cin</label>
+    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="nom categorie" name="cin" value="<?PHP echo $cin ?>" readonly>
+  </div>
+<button type="submit" class="btn btn-primary" name="modifier" onclick="return verifad()" >Modifier</button>
+
+	 
+	   
+</form>
   </div>
 </div>
-
-
-         </div>
           <!-- Page Footer-->
           <footer class="main-footer">
             <div class="container-fluid">
@@ -256,6 +274,34 @@ echo "</script>";
     <script src="vendor/chart.js/Chart.min.js"></script>
     <script src="vendor/jquery-validation/jquery.validate.min.js"></script>
     <!-- Main File-->
-    <script src="js/front.js"></script>
+    <script src="js/front.js"></script>	
+		<?php
+		
+	   
+	if ( isset($_POST['modifier']))
+{
+
+  $categorie = new admin($_POST['id'],$_POST['mdp'],$_POST['cin'],$_POST['tel']);
+  $cat= new adminC();
+  $cat->modifieradmin($categorie,$cin);
+echo "<script type='text/javascript'>";
+echo "alert('Modifier avec success!');
+window.location.href='../admin/admin_v.php';";
+	echo "</script>";
+
+}
+
+?>
+	
+	
+	
+	
+	
+	
   </body>
+  
+  
+  
+  
+  
 </html>

@@ -9,7 +9,7 @@ class  produitC {
 	function ajouterproduit($produit)
 	{
 
- 	$sql="INSERT INTO produit (refe,mar,dest,prix,qte,url,nomCat,descr) VALUES(:refe,:mar,:dest,:prix,:qte,:url,:n,:descr)";
+ 	$sql="INSERT INTO produit (refe,mar,dest,prix,qte,url,nomCat,descr,dateajout) VALUES(:refe,:mar,:dest,:prix,:qte,:url,:n,:descr,current_date())";
  	$db = config::getConnexion();
  		try{
 
@@ -209,6 +209,12 @@ function modifierproduit($produit,$refe)
         	die('Erreur:'.$e->getMessage());
         }
     } 
+	function shop()
+    {
+        $db = config::getConnexion();
+        $req1 = $db->query("SELECT  * FROM produit  where DATE(dateajout)= CURDATE()");
+        return $req1->rowCount();
+    }
 }
 
 

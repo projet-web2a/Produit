@@ -36,13 +36,14 @@ class  adminC {
 function modifieradmin($admin,$id)
 	{
  	$db = config::getConnexion();
- 	$sql="UPDATE admin SET   id=:id , mdp=:mdp , tel=:tel   where cin=:id";
+ 	$sql="UPDATE admin SET mdp=:mdp , tel=:tel   where cin=:id";
  		try{
 
         $req=$db->prepare($sql);		
        
 		$req->bindValue(':id',$id);
-		$req->bindValue(':cin',$admin->getcin());
+		
+	
 		$req->bindValue(':mdp',$admin->getmdp());
 		$req->bindValue(':tel',$admin->gettel());
 		
@@ -106,6 +107,18 @@ function modifieradmin($admin,$id)
 			$result = $req->fetch(PDO::FETCH_OBJ);
 			return $result;
 		}
+		
+			 function verifsuper($cin)
+		{
+			$db = config::getConnexion();
+			$sql = 'SELECT COUNT(*) AS cin FROM admin WHERE cin = :cin AND role = 1  LIMIT 1';
+			$req = $db->prepare($sql);
+			$req->bindValue(':cin',$cin);
+			$req->execute();
+			$result = $req->fetch(PDO::FETCH_OBJ);
+			return $result;
+		}
+		
 	
 }
 
