@@ -1,8 +1,19 @@
+<?php  session_start(); ?>
 <?php 
  
 require 'C:/wamp64/www/Projet2eme/core/produitC.php';
 $produitC=new produitC();
 $listeproduit=$produitC->trierproduitmar();
+
+
+ if (empty($_SESSION['id']))
+ {
+	 echo "<script type='text/javascript'>";
+echo "alert('Please Login First');
+window.location.href='login.php';";
+echo "</script>";
+	 
+ }
 
  
 ?>
@@ -120,7 +131,7 @@ $listeproduit=$produitC->trierproduitmar();
                   </ul>
                 </li>
                 <!-- Logout    -->
-                <li class="nav-item"><a href="login.html" class="nav-link logout"> <span class="d-none d-sm-inline">Logout</span><i class="fa fa-sign-out"></i></a></li>
+                <li class="nav-item"><a href="login.php" class="nav-link logout"> <span class="d-none d-sm-inline">Logout</span><i class="fa fa-sign-out"></i></a></li>
               </ul>
             </div>
           </div>

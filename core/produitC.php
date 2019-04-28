@@ -188,6 +188,13 @@ function modifierproduit($produit,$refe)
         return $req1->rowCount();
     }
 	
+	function ToTproduit()
+    {
+        $db = config::getConnexion();
+        $req1 = $db->query("SELECT * FROM produit ");
+        return $req1->rowCount();
+    }
+	
 	
 	function chercherproduit($foo)
     {   

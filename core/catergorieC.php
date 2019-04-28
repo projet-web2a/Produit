@@ -6,6 +6,7 @@ class  categorieC {
 	
 
 
+
 	function ajoutercategorie($categorie)
 	{
 
@@ -88,7 +89,12 @@ function modifiercategorie($categorie,$Refp)
             die('Erreur: '.$e->getMessage());
         }	
 	}
-	
+	function ToTcat()
+    {
+        $db = config::getConnexion();
+        $req1 = $db->query("SELECT * FROM categorie ");
+        return $req1->rowCount();
+    }
 	
 }
 

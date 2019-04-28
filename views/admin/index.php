@@ -1,4 +1,13 @@
-
+<?php  session_start(); 
+ if (empty($_SESSION['id']))
+ {
+	 echo "<script type='text/javascript'>";
+echo "alert('Please Login First');
+window.location.href='login.php';";
+echo "</script>";
+	 
+ }
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -106,7 +115,7 @@
                   </ul>
                 </li>
                 <!-- Logout    -->
-                <li class="nav-item"><a href="login.html" class="nav-link logout"> <span class="d-none d-sm-inline">Logout</span><i class="fa fa-sign-out"></i></a></li>
+                <li class="nav-item"><a href="login.php" class="nav-link logout"> <span class="d-none d-sm-inline">Logout</span><i class="fa fa-sign-out"></i></a></li>
               </ul>
             </div>
           </div>
@@ -181,12 +190,21 @@
                 <div class="col-xl-3 col-sm-6">
                   <div class="item d-flex align-items-center">
                     <div class="icon bg-red"><i class="icon-padnote"></i></div>
-                    <div class="title"><span>Work<br>Orders</span>
+                    <div class="title"><span>Total<br>Products</span>
                       <div class="progress">
-                        <div role="progressbar" style="width: 70%; height: 4px;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-red"></div>
+                        <div role="progressbar" style="width: 50%; height: 4px;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-red"></div>
                       </div>
                     </div>
-                    <div class="number"><strong>70</strong></div>
+					<?php    
+					require_once '../../core/produitC.php';
+$produitC=new produitC();
+$nombre=$produitC->ToTproduit();				
+					?>
+				
+ 
+
+
+                    <div class="number"><strong><?php echo $nombre; ?></strong></div>
                   </div>
                 </div>
                 <!-- Item -->
@@ -224,7 +242,9 @@
                 <div class="statistics col-lg-3 col-12">
                   <div class="statistic d-flex align-items-center bg-white has-shadow">
                     <div class="icon bg-red"><i class="fa fa-tasks"></i></div>
-                    <div class="text"><strong>234</strong><br><small>Applications</small></div>
+
+
+                    <div class="text"><strong>2</strong><br><small>Notification</small></div>
                   </div>
                   <div class="statistic d-flex align-items-center bg-white has-shadow">
                     <div class="icon bg-green"><i class="fa fa-calendar-o"></i></div>

@@ -1,16 +1,17 @@
-<?php 
- 
+
+<?php
+
 require 'C:/wamp64/www/Projet2eme/core/produitC.php';
+$refe=$_GET['refe'];
 $produitC=new produitC();
-$listeproduit=$produitC->afficherproduit();
-$num=$produitC->shop();
+$produit=$produitC->recupererproduit($refe);
 ?>
 
 <!DOCTYPE html>
 <html lang="zxx">
 
 <head>
-	<title>EyeZone|Shop</title>
+	<title>EyeZone| Single </title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
 	<meta name="keywords" content="Goggles a Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -31,6 +32,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<link rel="stylesheet" href="css/owl.carousel.css" type="text/css" media="all">
 	<link rel="stylesheet" href="css/owl.theme.css" type="text/css" media="all">
 	<link rel="stylesheet" type="text/css" href="css/jquery-ui1.css">
+	<link href="css/easy-responsive-tabs.css" rel='stylesheet' type='text/css' />
+	<link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
 	<link href="css/style.css" rel='stylesheet' type='text/css' />
 	<link href="css/fontawesome-all.css" rel="stylesheet">
 	<link href="//fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
@@ -52,32 +55,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</ul>
 				</div>
 				<div class="col-md-6 logo-w3layouts text-center">
-				  <h1 class="logo-w3layouts"> <a class="navbar-brand" href="index.html"> EyeZone</a></h1>
+				  <h1 class="logo-w3layouts"><a class="navbar-brand" href="index.html">eyezone</a></h1>
 				</div>
 
 				<div class="col-md-3 top-info-cart text-right mt-lg-4">
 					<ul class="cart-inner-info">
-					
-					
-					
-					
-					
-					<li class="nav-item dropdown"> <a id="notifications" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-bell"></i><span class="badge bg-red badge-corner"><?php  if($num!=0)  {echo "1";} else {echo"0";}?></span></a>
-                  <ul aria-labelledby="notifications" class="dropdown-menu">
-                    <li><a rel="nofollow" href="#" class="dropdown-item"> 
-                        <div class="notification">
-                          <div class="notification-content"><i class="fa fa-envelope bg-green"></i> <?php   echo $num; ?> New Product  </div>
-                          <div class="notification-time"><small>4 minutes ago</small></div>
-                        </div></a></li>
-                    
-                
-                 
-                    <li><a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>view all notifications                                            </strong></a></li>
-                  </ul>
-                </li>
-				
-				
-				
+						<li class="button-log">
+							<a class="btn-open" href="#">
+								<span class="fa fa-user" aria-hidden="true"></span>
+							</a>
+						</li>
 						<li class="galssescart galssescart2 cart cart box_1">
 							<form action="#" method="post" class="last">
 								<input type="hidden" name="cmd" value="_cart">
@@ -90,7 +77,35 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</li>
 					</ul>
 					<!---->
-				
+					<div class="overlay-login text-left">
+						<button type="button" class="overlay-close1">
+							<i class="fa fa-times" aria-hidden="true"></i>
+						</button>
+						<div class="wrap">
+							<h5 class="text-center mb-4">Login Now</h5>
+							<div class="login p-5 bg-dark mx-auto mw-100">
+								<form action="#" method="post">
+									<div class="form-group">
+										<label class="mb-2">Email address</label>
+										<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" required="">
+										<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+									</div>
+									<div class="form-group">
+										<label class="mb-2">Password</label>
+										<input type="password" class="form-control" id="exampleInputPassword1" placeholder="" required="">
+									</div>
+									<div class="form-check mb-2">
+										<input type="checkbox" class="form-check-input" id="exampleCheck1">
+										<label class="form-check-label" for="exampleCheck1">Check me out</label>
+									</div>
+									<button type="submit" class="btn btn-primary submit mb-4">Sign In</button>
+
+								</form>
+							</div>
+							<!---->
+						</div>
+					</div>
+					<!---->
 				</div>
 			</div>
 			<div class="search">
@@ -104,9 +119,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<button type="button" class="overlay-close">
 						<i class="fa fa-times" aria-hidden="true"></i>
 					</button>
-					<form  method="POST" class="d-flex" >
-						<input class="form-control" type="search" placeholder="Search here..." required="" name="inputchercher">
-						<button type="submit" class="btn btn-primary submit" >
+					<form action="#" method="post" class="d-flex">
+						<input class="form-control" type="search" placeholder="Search here..." required="">
+						<button type="submit" class="btn btn-primary submit">
 							<i class="fas fa-search"></i>
 						</button>
 					</form>
@@ -130,10 +145,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<span class="sr-only">(current)</span>
 							</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="about.html">Sale</a>
-						</li>
-						<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> About </a>
+						<li class="nav-item"> <a class="nav-link" href="about.html">SALe</a> </li>
+						<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">aBOUT </a>
 						  <ul class="dropdown-menu mega-menu ">
 								<li>
 									<div class="row">
@@ -264,7 +277,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 											<h5 class="tittle-w3layouts-sub-nav">Tittle goes here </h5>
 											<div class="media-mini mt-3">
 												<a href="shop.html">
-													<img src="images/g1.jpg" class="img-fluid" alt="">
+													<img src="images/<?php echo $produit[0]->url; ?>" class="img-fluid" alt="">
 												</a>
 											</div>
 
@@ -285,7 +298,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 			</nav>
 		</header>
-    </div>
 		<!-- banner -->
 		<div class="banner_inner">
 			<div class="services-breadcrumb">
@@ -296,293 +308,208 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<a href="index.html">Home</a>
 							<i>|</i>
 						</li>
-						<li>Shop</li>
+						<li>Single Page</li>
 					</ul>
 				</div>
 			</div>
 
 		</div>
+		
+	</div>
 		<!--//banner -->
 		<!--/shop-->
 		<section class="banner-bottom-wthreelayouts py-lg-5 py-3">
-			<div class="container-fluid">
-				<div class="inner-sec-shop px-lg-4 px-3">
-					<h3 class="tittle-w3layouts my-lg-4 mt-3">New Arrivals for you </h3>
+			<div class="container">
+				<div class="inner-sec-shop pt-lg-4 pt-3">
 					<div class="row">
-						<!-- product left -->
-						<div class="side-bar col-lg-3">
-							<div class="search-hotel">
-								<h3 class="agileits-sear-head">Search Here..</h3>
-								<form  method="post" action="chercher.php">
-										<input class="form-control" type="search" name="sea" placeholder="Search here..." required="">
-										
-									<button class="btn1">
-												<i class="fas fa-search"></i>
-										
-										</button>
-										<div class="clearfix"> </div>
-									</form>
-							</div>
-							<!-- price range -->
-							<div class="range">
-								<h3 class="agileits-sear-head">Price range</h3>
-								<ul class="dropdown-menu6">
-									<li>
-
-										<div id="slider-range"></div>
-										<input type="text" id="amount" style="border: 0; color: #ffffff; font-weight: normal;" />
-									</li>
-								</ul>
-							</div>
-							<!-- //price range -->
-							<!--preference -->
-							<div class="left-side">
-								<h3 class="agileits-sear-head">Deal Offer On</h3>
-								<ul>
-									<li>
-										<input type="checkbox" class="checked">
-										<span class="span">Backpack</span>
-									</li>
-									<li>
-										<input type="checkbox" class="checked">
-										<span class="span">Phone Pocket</span>
-									</li>
-
-								</ul>
-							</div>
-							<!-- // preference -->
-							<!-- discounts -->
-							<div class="left-side">
-								<h3 class="agileits-sear-head">Discount</h3>
-								<ul>
-									<li>
-										<input type="checkbox" class="checked">
-										<span class="span">5% or More</span>
-									</li>
-									<li>
-										<input type="checkbox" class="checked">
-										<span class="span">10% or More</span>
-									</li>
-									<li>
-										<input type="checkbox" class="checked">
-										<span class="span">20% or More</span>
-									</li>
-									<li>
-										<input type="checkbox" class="checked">
-										<span class="span">30% or More</span>
-									</li>
-									<li>
-										<input type="checkbox" class="checked">
-										<span class="span">50% or More</span>
-									</li>
-									<li>
-										<input type="checkbox" class="checked">
-										<span class="span">60% or More</span>
-									</li>
-								</ul>
-							</div>
-							<!-- //discounts -->
-							<!-- reviews -->
-							<div class="customer-rev left-side">
-								<h3 class="agileits-sear-head">Customer Review</h3>
-								<ul>
-									<li>
-										<a href="#">
-											<i class="fa fa-star" aria-hidden="true"></i>
-											<i class="fa fa-star" aria-hidden="true"></i>
-											<i class="fa fa-star" aria-hidden="true"></i>
-											<i class="fa fa-star" aria-hidden="true"></i>
-											<i class="fa fa-star" aria-hidden="true"></i>
-											<span>5.0</span>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<i class="fa fa-star" aria-hidden="true"></i>
-											<i class="fa fa-star" aria-hidden="true"></i>
-											<i class="fa fa-star" aria-hidden="true"></i>
-											<i class="fa fa-star" aria-hidden="true"></i>
-											<i class="fa fa-star-o" aria-hidden="true"></i>
-											<span>4.0</span>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<i class="fa fa-star" aria-hidden="true"></i>
-											<i class="fa fa-star" aria-hidden="true"></i>
-											<i class="fa fa-star" aria-hidden="true"></i>
-											<i class="fa fa-star-half-o" aria-hidden="true"></i>
-											<i class="fa fa-star-o" aria-hidden="true"></i>
-											<span>3.5</span>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<i class="fa fa-star" aria-hidden="true"></i>
-											<i class="fa fa-star" aria-hidden="true"></i>
-											<i class="fa fa-star" aria-hidden="true"></i>
-											<i class="fa fa-star-o" aria-hidden="true"></i>
-											<i class="fa fa-star-o" aria-hidden="true"></i>
-											<span>3.0</span>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<i class="fa fa-star" aria-hidden="true"></i>
-											<i class="fa fa-star" aria-hidden="true"></i>
-											<i class="fa fa-star-half-o" aria-hidden="true"></i>
-											<i class="fa fa-star-o" aria-hidden="true"></i>
-											<i class="fa fa-star-o" aria-hidden="true"></i>
-											<span>2.5</span>
-										</a>
-									</li>
-								</ul>
-							</div>
-							<!-- //reviews -->
-							<!-- deals -->
-							<div class="deal-leftmk left-side">
-								<h3 class="agileits-sear-head">Special Deals</h3>
-								<div class="special-sec1">
-									<div class="img-deals">
-										<img src="images/s1.jpg" alt="">
-									</div>
-									<div class="img-deal1">
-										<h3>Farenheit (Grey)</h3>
-										<a href="single.html">$575.00</a>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-								<div class="special-sec1">
-									<div class="col-xs-4 img-deals">
-										<img src="images/s2.jpg" alt="">
-									</div>
-									<div class="col-xs-8 img-deal1">
-										<h3>Opium (Grey)</h3>
-										<a href="single.html">$325.00</a>
-									</div>
-									<div class="clearfix"></div>
-								</div>
-								<div class="special-sec1">
-										<div class="col-xs-4 img-deals">
-											<img src="images/m2.jpg" alt="">
-										</div>
-										<div class="col-xs-8 img-deal1">
-											<h3>Azmani Round</h3>
-											<a href="single.html">$725.00</a>
-										</div>
-										<div class="clearfix"></div>
-									</div>
-									<div class="special-sec1">
-											<div class="col-xs-4 img-deals">
-												<img src="images/m4.jpg" alt="">
-											</div>
-											<div class="col-xs-8 img-deal1">
-												<h3>Farenheit Oval</h3>
-												<a href="single.html">$325.00</a>
-											</div>
+							<div class="col-lg-4 single-right-left ">
+									<div class="grid images_3_of_2">
+										<div class="flexslider1">
+					
+											<ul class="slides">
+												<li data-thumb="images/<?php echo $produit[0]->url;?>">
+													<div class="thumb-image"> <img src="images/<?php echo $produit[0]->url;?>" data-imagezoom="true" class="img-fluid" alt=" "> </div>
+												</li> </ul>
 											<div class="clearfix"></div>
 										</div>
-							</div>
-							<!-- //deals -->
-						</div>
-						<!-- //product left -->
-						<!--/product right-->
-						<div class="left-ads-display col-lg-9">
-							<div class="wrapper_top_shop">
-								<div class="row">
-										<div class="col-md-6 shop_left">
-												<img src="images/banner7.jpg" alt="">
-												<h6>40% off</h6>
-											</div>
-											<div class="col-md-6 shop_right">
-												<img src="images/banner4.jpg" alt="">
-												<h6>50% off</h6>
-											</div>
-						
+									</div>
 								</div>
-							  <div class="row">
-									<!-- /womens -->
-					<?php foreach($listeproduit as $produit): ?>				
-					<?php $refe=$produit->refe; ?>
-								  <div class="col-md-3 product-men women_two shop-gd">
-										<div class="product-googles-info googles">
-											<div class="men-pro-item">
-												<div class="men-thumb-item">
-													<img src="images/<?= $produit->url; ?>" class="img-fluid" alt="">
-													<div class="men-cart-pro">
-														<div class="inner-men-cart-pro">
-															<a href="single.php?refe=<?= $refe ?>" class="link-product-add-cart"><?= $produit->dest; ?></a>
-														</div>
-													</div>
-													<span class="product-new-top"><?= $produit->dest; ?></span>
+								<div class="col-lg-8 single-right-left simpleCart_shelfItem">
+									<h3><?php echo $produit[0]->mar; ?></h3>
+									<p><span class="item_price"><?php echo $produit[0]->prix," Dt" ; ?></span>
+										<del></del>
+									</p>
+									<div class="rating1">
+										<ul class="stars">
+											<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+											<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+											<li><a href="#"><i class="fa fa-star" aria-hidden="true"></i></a></li>
+											<li><a href="#"><i class="fa fa-star-half-o" aria-hidden="true"></i></a></li>
+											<li><a href="#"><i class="fa fa-star-o" aria-hidden="true"></i></a></li>
+										</ul>
+									</div>
+									<div class="description">
+										<h5>Check delivery, payment options and charges at your location</h5>
+										<form action="#" method="post">
+												<input class="form-control" type="text" name="Email" placeholder="Please enter..." required="">
+											<input type="submit" value="Check">
+										</form>
+									</div>
+									<div class="color-quality">
+										<div class="color-quality-right">
+											<h5>Quantity :</h5>
+											<select id="country1" onchange="change_country(this.value)" class="frm-field required sect">
+													<option value="null">1 Qty</option>
+													<option value="null">2 Qty</option> 
+													<option value="null">3 Qty</option>					
+													<option value="null"><?php if ($produit[0]->qte>3) { echo $produit[0]->qte,"Qty";} else {echo "";} ?> </option>								
+												</select>
+										</div>
+									</div>
+									<div class="occasional">
+										<h5>Types :</h5>
+										<?php       if ($produit[0]->dest=='Homme') {$homme='checked="true"';}
+										            else {$homme='';}
+													if ($produit[0]->dest=='Femme') {$femme='checked="true"';}
+													else {$femme='';}
+													if ($produit[0]->dest=='Enfant') {$enfant='checked="true"';}
+													else {$enfant='';}
+										?>
+										<div class="colr ert">
+											<label class="radio"><input type="radio" name="radio" <?php echo $homme ?>><i></i>Male</label>
+										</div>
+										<div class="colr">
+											<label class="radio"><input type="radio" name="radio" <?php echo $femme ?>><i></i>Female</label>
+										</div>
+										<div class="colr">
+											<label class="radio"><input type="radio" name="radio" <?php echo $enfant ?>><i></i>Kids</label>
+										</div>
+										<div class="clearfix"> </div>
+									</div>
+									<div class="occasion-cart">
+											<div class="googles single-item singlepage">
+													<form action="#" method="post">
+														<input type="hidden" name="cmd" value="_cart">
+														<input type="hidden" name="add" value="1">
+														<input type="hidden" name="googles_item" value="Farenheit">
+														<input type="hidden" name="amount" value="575.00">
+														<button type="submit" class="googles-cart pgoogles-cart">
+															Add to Cart
+														</button>
+														
+													</form>
+		
 												</div>
-												<div class="item-info-product">
-													<div class="info-product-price">
-														<div class="grid_meta">
-															<div class="product_price">
-															  <h4> <a href="single.php?refe='$refe'"> <?= $produit->mar ?></a></h4>
-															  <div class="grid-price mt-2">
-																	<span class="money "><?= $produit->prix; ?> Dt</span>
-															  </div>
+									</div>
+									<ul class="footer-social text-left mt-lg-4 mt-3">
+											<li>Share On : </li>
+											<li class="mx-2">
+												<a href="#">
+													<span class="fab fa-facebook-f"></span>
+												</a>
+											</li>
+											<li class="mx-2">
+												<a href="#">
+													<span class="fab fa-twitter"></span>
+												</a>
+											</li>
+											<li class="mx-2">
+												<a href="#">
+													<span class="fab fa-google-plus-g"></span>
+												</a>
+											</li>
+											<li class="mx-2">
+												<a href="#">
+													<span class="fab fa-linkedin-in"></span>
+												</a>
+											</li>
+											<li class="mx-2">
+												<a href="#">
+													<span class="fas fa-rss"></span>
+												</a>
+											</li>
+											
+										</ul>
+			
+								</div>
+								<div class="clearfix"> </div>
+								<!--/tabs-->
+								<div class="responsive_tabs">
+									<div id="horizontalTab">
+										<ul class="resp-tabs-list">
+											<li>Description   <?php echo"      "; ?></li>
+											<li><?php echo"      "; ?></li>
+											<li><?php echo"      "; ?></li>
+											<li><?php echo"      "; ?></li>
+										</ul>
+										<div class="resp-tabs-container">
+											<!--/tab_one-->
+											<div class="tab1">
+					
+												<div class="single_page">
+													<h6><?php echo $produit[0]->nomCat;?></h6>
+													<p><?php echo "This is the description of the Article that you are viewing Right Now"; ?></p>
+													<p class="para"> <?php echo $produit[0]->descr;?> </p>
+												</div>
+											</div>
+											<!--//tab_one-->
+											<div class="tab2">
+					
+												<div class="single_page">
+													<div class="bootstrap-tab-text-grids">
+														<div class="bootstrap-tab-text-grid">
+															<div class="bootstrap-tab-text-grid-left">
+																<img src="images/team1.jpg" alt=" " class="img-fluid">
 															</div>
-															<ul class="stars">
-																<li>
-																	<a href="#">
-																		<i class="fa fa-star" aria-hidden="true"></i>
-																	</a>
-																</li>
-																<li>
-																	<a href="#">
-																		<i class="fa fa-star" aria-hidden="true"></i>
-																	</a>
-																</li>
-																<li>
-																	<a href="#">
-																		<i class="fa fa-star" aria-hidden="true"></i>
-																	</a>
-																</li>
-																<li>
-																	<a href="#">
-																		<i class="fa fa-star" aria-hidden="true"></i>
-																	</a>
-																</li>
-																<li>
-																	<a href="#">
-																		<i class="fa fa-star-half-o" aria-hidden="true"></i>
-																	</a>
-																</li>
-															</ul>
+															<div class="bootstrap-tab-text-grid-right">
+																<ul>
+																	<li><a href="#">Admin</a></li>
+																	<li><a href="#"><i class="fa fa-reply-all" aria-hidden="true"></i> Reply</a></li>
+																</ul>
+																<p>Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque vehicula augue eget.Ut enim ad minima veniam,
+																	quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis
+																	autem vel eum iure reprehenderit.</p>
+															</div>
+															<div class="clearfix"> </div>
 														</div>
-														<div class="googles single-item hvr-outline-out">
+														<div class="add-review">
+															<h4>add a review</h4>
 															<form action="#" method="post">
-																<input type="hidden" name="cmd" value="_cart">
-																<input type="hidden" name="add" value="1">
-																<input type="hidden" name="googles_item" value="Farenheit">
-																<input type="hidden" name="amount" value="575.00">
-																<button type="submit" class="googles-cart pgoogles-cart">
-																	<i class="fas fa-cart-plus"></i>
-																</button>
+																	<input class="form-control" type="text" name="Name" placeholder="Enter your email..." required="">
+																<input class="form-control" type="email" name="Email" placeholder="Enter your email..." required="">
+																<textarea name="Message" required></textarea>
+																<input type="submit" value="SEND">
 															</form>
-
 														</div>
 													</div>
-													<div class="clearfix"></div>
+					
+												</div>
+											</div>
+											<div class="tab3">
+					
+												<div class="single_page">
+													<h6>Irayz Butterfly Sunglasses  (Black)</h6>
+													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque vehicula augue eget nisl ullamcorper, molestie
+														blandit ipsum auctor. Mauris volutpat augue dolor.Consectetur adipisicing elit, sed do eiusmod tempor incididunt
+														ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. labore et dolore
+														magna aliqua.</p>
+													<p class="para">Lorem ipsum dolor sit amet, consectetur adipisicing elPellentesque vehicula augue eget nisl ullamcorper, molestie
+														blandit ipsum auctor. Mauris volutpat augue dolor.Consectetur adipisicing elit, sed do eiusmod tempor incididunt
+														ut lab ore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. labore et dolore
+														magna aliqua.</p>
 												</div>
 											</div>
 										</div>
 									</div>
-									
-					<?php endforeach; ?>
-
-		</div>
-								
-									
-							</div>
-						</div>
-						<!--//product right-->
+								</div>
+								<!--//tabs-->
+					
 					</div>
+				</div>
+			</div>
+				<div class="container-fluid">
 					<!--/slide-->
-				<div class="slider-img mid-sec mt-lg-5 mt-2">
+					<div class="slider-img mid-sec mt-lg-5 mt-2 px-lg-5 px-3">
 						<!--//banner-sec-->
 						<h3 class="tittle-w3layouts text-left my-lg-4 my-3">Featured Products</h3>
 						<div class="mid-slider">
@@ -596,18 +523,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 														<img src="images/s5.jpg" class="img-fluid" alt="">
 														<div class="men-cart-pro">
 															<div class="inner-men-cart-pro">
-																<a href="single.php?refe=<?= $refe ?>" class="link-product-add-cart">Quick View</a>
+																<a href="single.html" class="link-product-add-cart">Quick View</a>
 															</div>
 														</div>
 														<span class="product-new-top">New</span>
 													</div>
 													<div class="item-info-product">
-	
+
 														<div class="info-product-price">
 															<div class="grid_meta">
 																<div class="product_price">
 																	<h4>
-																		<a href="single.php?refe='$refe'">Fastrack Aviator </a>
+																		<a href="single.html">Fastrack Aviator </a>
 																	</h4>
 																	<div class="grid-price mt-2">
 																		<span class="money ">$325.00</span>
@@ -650,12 +577,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 																	<button type="submit" class="googles-cart pgoogles-cart">
 																		<i class="fas fa-cart-plus"></i>
 																	</button>
-
 																</form>
-	
+
 															</div>
 														</div>
-	
+
 													</div>
 												</div>
 											</div>
@@ -671,18 +597,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 														<img src="images/s6.jpg" class="img-fluid" alt="">
 														<div class="men-cart-pro">
 															<div class="inner-men-cart-pro">
-																<a href="single.php?refe='$refe'" class="link-product-add-cart">Quick View</a>
+																<a href="single.html" class="link-product-add-cart">Quick View</a>
 															</div>
 														</div>
 														<span class="product-new-top">New</span>
 													</div>
 													<div class="item-info-product">
-	
+
 														<div class="info-product-price">
 															<div class="grid_meta">
 																<div class="product_price">
 																	<h4>
-																		<a href="single.php?refe='$refe'">MARTIN Aviator </a>
+																		<a href="single.html">MARTIN Aviator </a>
 																	</h4>
 																	<div class="grid-price mt-2">
 																		<span class="money ">$425.00</span>
@@ -726,10 +652,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 																		<i class="fas fa-cart-plus"></i>
 																	</button>
 																</form>
-	
+
 															</div>
 														</div>
-	
+
 													</div>
 												</div>
 											</div>
@@ -745,18 +671,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 														<img src="images/s7.jpg" class="img-fluid" alt="">
 														<div class="men-cart-pro">
 															<div class="inner-men-cart-pro">
-																<a href="single.php?refe='$refe'" class="link-product-add-cart">Quick View</a>
+																<a href="single.html" class="link-product-add-cart">Quick View</a>
 															</div>
 														</div>
 														<span class="product-new-top">New</span>
 													</div>
 													<div class="item-info-product">
-	
+
 														<div class="info-product-price">
 															<div class="grid_meta">
 																<div class="product_price">
 																	<h4>
-																		<a href="single.php?refe='$refe'">Royal Son Aviator </a>
+																		<a href="single.html">Royal Son Aviator </a>
 																	</h4>
 																	<div class="grid-price mt-2">
 																		<span class="money ">$425.00</span>
@@ -800,10 +726,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 																		<i class="fas fa-cart-plus"></i>
 																	</button>
 																</form>
-	
+
 															</div>
 														</div>
-	
+
 													</div>
 												</div>
 											</div>
@@ -819,18 +745,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 														<img src="images/s8.jpg" class="img-fluid" alt="">
 														<div class="men-cart-pro">
 															<div class="inner-men-cart-pro">
-																<a href="single.php?refe='$refe'" class="link-product-add-cart">Quick View</a>
+																<a href="single.html" class="link-product-add-cart">Quick View</a>
 															</div>
 														</div>
 														<span class="product-new-top">New</span>
 													</div>
 													<div class="item-info-product">
-	
+
 														<div class="info-product-price">
 															<div class="grid_meta">
 																<div class="product_price">
 																	<h4>
-																		<a href="single.php?refe='$refe'">Irayz Butterfly </a>
+																		<a href="single.html">Irayz Butterfly </a>
 																	</h4>
 																	<div class="grid-price mt-2">
 																		<span class="money ">$281.00</span>
@@ -874,10 +800,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 																		<i class="fas fa-cart-plus"></i>
 																	</button>
 																</form>
-	
+
 															</div>
 														</div>
-	
+
 													</div>
 												</div>
 											</div>
@@ -893,18 +819,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 														<img src="images/s9.jpg" class="img-fluid" alt="">
 														<div class="men-cart-pro">
 															<div class="inner-men-cart-pro">
-																<a href="single.php?refe='$refe'" class="link-product-add-cart">Quick View</a>
+																<a href="single.html" class="link-product-add-cart">Quick View</a>
 															</div>
 														</div>
 														<span class="product-new-top">New</span>
 													</div>
 													<div class="item-info-product">
-	
+
 														<div class="info-product-price">
 															<div class="grid_meta">
 																<div class="product_price">
 																	<h4>
-																		<a href="single.php?refe='$refe'">Jerry Rectangular </a>
+																		<a href="single.html">Jerry Rectangular </a>
 																	</h4>
 																	<div class="grid-price mt-2">
 																		<span class="money ">$525.00</span>
@@ -948,10 +874,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 																		<i class="fas fa-cart-plus"></i>
 																	</button>
 																</form>
-	
+
 															</div>
 														</div>
-	
+
 													</div>
 												</div>
 											</div>
@@ -967,18 +893,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 														<img src="images/s10.jpg" class="img-fluid" alt="">
 														<div class="men-cart-pro">
 															<div class="inner-men-cart-pro">
-																<a href="single.php?refe='$refe'" class="link-product-add-cart">Quick View</a>
+																<a href="single.html" class="link-product-add-cart">Quick View</a>
 															</div>
 														</div>
 														<span class="product-new-top">New</span>
 													</div>
 													<div class="item-info-product">
-	
+
 														<div class="info-product-price">
 															<div class="grid_meta">
 																<div class="product_price">
 																	<h4>
-																		<a href="single.php?refe='$refe'">Herdy Wayfarer </a>
+																		<a href="single.html">Herdy Wayfarer </a>
 																	</h4>
 																	<div class="grid-price mt-2">
 																		<span class="money ">$325.00</span>
@@ -1013,19 +939,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 																</ul>
 															</div>
 															<div class="googles single-item hvr-outline-out">
-																<form action="#" method="post">
-																	<input type="hidden" name="cmd" value="_cart">
-																	<input type="hidden" name="add" value="1">
-																	<input type="hidden" name="googles_item" value="Herdy Wayfarer">
-																	<input type="hidden" name="amount" value="325.00">
-																	<button type="submit" class="googles-cart pgoogles-cart">
-																		<i class="fas fa-cart-plus"></i>
-																	</button>
-																</form>
+																	<form action="#" method="post">
+																		<input type="hidden" name="cmd" value="_cart">
+																		<input type="hidden" name="add" value="1">
+																		<input type="hidden" name="googles_item" value="Royal Son Aviator">
+																		<input type="hidden" name="amount" value="425.00">
+																		<button type="submit" class="googles-cart pgoogles-cart">
+																			<i class="fas fa-cart-plus"></i>
+																		</button>
 	
-															</div>
+																		
+																	</form>
+	
+																</div>
 														</div>
-	
+
 													</div>
 												</div>
 											</div>
@@ -1037,7 +965,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</div>
 					<!--//slider-->
 				</div>
-			</div>
 		</section>
 		<!--footer -->
 		<footer class="py-lg-5 py-3">
@@ -1239,6 +1166,45 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 		<!-- //end-smooth-scrolling -->
 
+		<!-- single -->
+		<script src="js/imagezoom.js"></script>
+		<!-- single -->
+		<!-- script for responsive tabs -->
+		<script src="js/easy-responsive-tabs.js"></script>
+		<script>
+			$(document).ready(function () {
+				$('#horizontalTab').easyResponsiveTabs({
+					type: 'default', //Types: default, vertical, accordion           
+					width: 'auto', //auto or any width like 600px
+					fit: true, // 100% fit in a container
+					closed: 'accordion', // Start closed if in accordion view
+					activate: function (event) { // Callback function if tab is switched
+						var $tab = $(this);
+						var $info = $('#tabInfo');
+						var $name = $('span', $info);
+						$name.text($tab.text());
+						$info.show();
+					}
+				});
+				$('#verticalTab').easyResponsiveTabs({
+					type: 'vertical',
+					width: 'auto',
+					fit: true
+				});
+			});
+		</script>
+		<!-- FlexSlider -->
+		<script src="js/jquery.flexslider.js"></script>
+		<script>
+			// Can also be used with $(document).ready()
+			$(window).load(function () {
+				$('.flexslider1').flexslider({
+					animation: "slide",
+					controlNav: "thumbnails"
+				});
+			});
+		</script>
+		<!-- //FlexSlider-->
 
 		<!-- dropdown nav -->
 		<script>
@@ -1256,7 +1222,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			});
 		</script>
 		<!-- //dropdown nav -->
-		<script src="js/move-top.js"></script>
+	<script src="js/move-top.js"></script>
     <script src="js/easing.js"></script>
     <script>
         jQuery(document).ready(function($) {
@@ -1287,10 +1253,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </script>
     <!--// end-smoth-scrolling -->
 
+
 		<script src="js/bootstrap.js"></script>
 		<!-- js file -->
-		
-		
 </body>
 
 </html>

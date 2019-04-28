@@ -17,7 +17,7 @@ include_once 'AdminC.php';
 		$currentUrl = $_SESSION['currentURL'];
 		
 
-		header("location:../views/admin/produit_v.php?action=yes"); 
+		header("location:../views/admin/index.php?action=yes"); 
 	}
 
 }

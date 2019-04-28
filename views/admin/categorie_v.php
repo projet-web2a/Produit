@@ -1,10 +1,21 @@
+<?php  session_start(); ?>
 <?php 
  
 require 'C:/wamp64/www/Projet2eme/core/catergorieC.php';
 $categorieC=new categorieC();
 $listecategorie=$categorieC->affichercategorie();
 
- 
+  if (empty($_SESSION['id']))
+ {
+	 echo "<script type='text/javascript'>";
+echo "alert('Please Login First');
+window.location.href='login.php';";
+echo "</script>";
+	 
+ }
+
+
+
 ?>
 
 
@@ -54,7 +65,7 @@ $listecategorie=$categorieC->affichercategorie();
             <div class="navbar-holder d-flex align-items-center justify-content-between">
               <!-- Navbar Header-->
               <div class="navbar-header">
-                <!-- Navbar Brand --><a href="index.html" class="navbar-brand d-none d-sm-inline-block">
+                <!-- Navbar Brand --><a href="index.php" class="navbar-brand d-none d-sm-inline-block">
                   <div class="brand-text d-none d-lg-inline-block"> EyeZone</div>
                   <div class="brand-text d-none d-sm-inline-block d-lg-none"><strong>BD</strong></div></a>
                 <!-- Toggle Button--><a id="toggle-btn" href="#" class="menu-btn active"><span></span><span></span><span></span></a>
@@ -118,7 +129,7 @@ $listecategorie=$categorieC->affichercategorie();
                   </ul>
                 </li>
                 <!-- Logout    -->
-                <li class="nav-item"><a href="login.html" class="nav-link logout"> <span class="d-none d-sm-inline">Logout</span><i class="fa fa-sign-out"></i></a></li>
+                <li class="nav-item"><a href="login.php" class="nav-link logout"> <span class="d-none d-sm-inline">Logout</span><i class="fa fa-sign-out"></i></a></li>
               </ul>
             </div>
           </div>
@@ -137,7 +148,7 @@ $listecategorie=$categorieC->affichercategorie();
           </div>
           <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
           <ul class="list-unstyled">
-            <li><a href="index.html"> <i class="icon-home"></i>Home </a></li>
+            <li><a href="index.php"> <i class="icon-home"></i>Home </a></li>
              <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>Stock </a>
               <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
                 <li><a href="produit_v.php">Produit</a></li>
